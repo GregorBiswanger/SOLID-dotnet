@@ -22,8 +22,17 @@ namespace PlzSuperTool
             base.OnStartup(e);
 
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient<MainWindowViewModel>();
-            serviceCollection.AddTransient<ZipFileRepository>();
+            serviceCollection.AddTransient<MainWindowViewModel>()
+                .AddTransient<ZipRepositoryFactory>()
+                .AddTransient<ZipFileRepository>()
+                .AddTransient<ZipWebRepository>()
+                .AddSingleton<IZipRepository>(serviceProvider =>
+                {
+                    var zipRepositoryFactory = serviceProvider.GetService(typeof(ZipRepositoryFactory)) as ZipRepositoryFactory;
+                    var zipRepository = zipRepositoryFactory.Create();
+
+                    return new ZipCaching(zipRepository);
+                });
 
             _serviceProvider = serviceCollection.BuildServiceProvider(true);
 
