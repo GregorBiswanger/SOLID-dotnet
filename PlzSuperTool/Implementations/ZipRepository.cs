@@ -5,25 +5,26 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Web;
+using PlzSuperTool.Contracts;
 
-namespace PlzSuperTool
+namespace PlzSuperTool.Implementations
 {
-    internal class ZipRepository : IZipRepository
+    internal class ZipRepository : IZipSource
     {
-        private readonly Dictionary<string, string[]> cache = new Dictionary<string, string[]>();
-        
+        private readonly IDictionary<string, string[]> cache = new Dictionary<string, string[]>();
+
         public string[] GetZipsFrom(bool online, string cityname)
         {
             using var logger = File.AppendText("log.txt");
             logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname);
 
-            var zips = new List<string>();
+            IList<string> zips = new List<string>();
 
             if (cache.ContainsKey(cityname))
             {
                 return cache[cityname];
             }
-            
+
             if (online != true)
             {
                 foreach (var line in File.ReadAllLines("DE.txt"))
@@ -57,21 +58,6 @@ namespace PlzSuperTool
             logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname + " - " + zips.Count + " results");
 
             return zips.ToArray();
-        }
-
-        public string[] GetStreetsFromZip(string zip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] GetAllCities()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] GetAllStates()
-        {
-            throw new NotImplementedException();
         }
     }
 
