@@ -3,7 +3,7 @@ using PlzSuperTool.Contracts;
 
 namespace PlzSuperTool.Implementations
 {
-    public class Logger : ILogger
+    public sealed class Logger : ILogger
     {
         private readonly StreamWriter logger;
         public Logger()
