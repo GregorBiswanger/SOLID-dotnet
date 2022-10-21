@@ -8,9 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="DE.txt">
+    <ProjectReference Include="..\SOLID.Core\SOLID.Core.csproj" />
+    <ProjectReference Include="..\SOLID.Implementations\SOLID.Implementations.csproj" />
+    <ProjectReference Include="..\SOLID.ViewModels\SOLID.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DE.txt" />
+    <Content Include="DE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>
