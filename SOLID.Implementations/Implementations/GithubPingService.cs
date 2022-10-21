@@ -8,7 +8,7 @@ using PlzSuperTool.Contracts;
 
 namespace PlzSuperTool.Implementations
 {
-    internal class GithubPingService : IPingService
+    public sealed class GithubPingService : IPingService
     {
         public bool Ping(string host, int timeout)
         {

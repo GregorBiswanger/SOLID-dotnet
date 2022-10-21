@@ -8,13 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="DE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SOLID.Core\SOLID.Core.csproj" />
+    <ProjectReference Include="..\SOLID.Implementations\SOLID.Implementations.csproj" />
+    <ProjectReference Include="..\SOLID.ViewModels\SOLID.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

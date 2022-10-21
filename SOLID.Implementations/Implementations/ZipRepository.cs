@@ -9,7 +9,7 @@ using PlzSuperTool.Contracts;
 
 namespace PlzSuperTool.Implementations
 {
-    internal class ZipRepository : IZipSource
+    public sealed class ZipRepository : IZipSource
     {
         private readonly IDictionary<string, string[]> cache = new Dictionary<string, string[]>();
 
