@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using PlzSuperTool.Infrastructure.Features.MainWindow;
+using PlzSuperTool.Infrastructure.Logging;
 
 namespace PlzSuperTool
 {
@@ -26,12 +27,14 @@ namespace PlzSuperTool
                 .AddTransient<ZipRepositoryFactory>()
                 .AddTransient<ZipFileRepository>()
                 .AddTransient<ZipWebRepository>()
+                .AddTransient<ILogger, Logger>()
                 .AddSingleton<IZipRepository>(serviceProvider =>
                 {
                     var zipRepositoryFactory = serviceProvider.GetService(typeof(ZipRepositoryFactory)) as ZipRepositoryFactory;
                     var zipRepository = zipRepositoryFactory.Create();
+                    var logger = serviceProvider.GetService<ILogger>();
 
-                    return new ZipCaching(zipRepository);
+                    return new ZipCaching(zipRepository, logger);
                 });
 
             _serviceProvider = serviceCollection.BuildServiceProvider(true);

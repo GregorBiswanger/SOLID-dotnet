@@ -1,20 +1,22 @@
-﻿namespace PlzSuperTool.Infrastructure.Features.MainWindow
+﻿using PlzSuperTool.Infrastructure.Logging;
+
+namespace PlzSuperTool.Infrastructure.Features.MainWindow
 {
     public class ZipCaching : IZipRepository
     {
         private readonly Dictionary<string, string[]> _cache = new();
         private readonly IZipRepository _zipRepository;
+        private readonly ILogger _logger;
 
-        public ZipCaching(IZipRepository zipRepository)
+        public ZipCaching(IZipRepository zipRepository, ILogger logger)
         {
             _zipRepository = zipRepository;
+            _logger = logger;
         }
 
         public string[] GetZipsFrom(string cityname)
         {
-            using var logger = File.AppendText("log.txt");
-            logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname);
-
+            _logger.Write("GetZipsFrom: " + cityname);
 
             if (_cache.ContainsKey(cityname))
             {
@@ -22,10 +24,9 @@
             }
 
             var zips = _zipRepository.GetZipsFrom(cityname);
-
-
             _cache.Add(cityname, zips.ToArray());
-            logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname + " - " + zips.Length + " results");
+
+            _logger.Write("GetZipsFrom: " + cityname + " - " + zips.Length + " results");
 
             return zips.ToArray();
         }
