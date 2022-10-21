@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -12,6 +12,7 @@ namespace PlzSuperTool.Implementations
     public sealed class OnlineZipRepository : IZipSource
     {
         private readonly ILogger logger;
+        private readonly IDictionary<string, string[]> cache = new Dictionary<string, string[]>();
         public OnlineZipRepository(ILogger logger)
         {
             this.logger = logger;
@@ -20,6 +21,11 @@ namespace PlzSuperTool.Implementations
         public string[] GetZipsFrom(string cityname)
         {
             logger?.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname);
+            
+            if (cache.ContainsKey(cityname))
+            {
+                return cache[cityname];
+            }
             
             string citynameUrlEncoded = HttpUtility.UrlEncode(cityname);
             const string baseUrl = "https://public.opendatasoft.com/api/records/1.0/search/";
