@@ -12,34 +12,37 @@ namespace PlzSuperTool.ViewModels
 {
     public sealed class MainViewModel : ObservableObject
     {
-        private readonly IZipSource zipRepository;
-        private readonly IPingService githubPingService;
+        private readonly IZipSource localZipRepository;
+        private readonly IZipSource onlineZipRepository;
+        private readonly IPingService pingService;
 
-        public MainViewModel(IZipSource zipRepository, IPingService githubPingService)
+        public MainViewModel(IZipSource localZipRepository, IZipSource onlineZipRepository, IPingService pingService)
         {
-            this.zipRepository = zipRepository ?? throw new ArgumentNullException(nameof(zipRepository));
-            this.githubPingService = githubPingService ?? throw new ArgumentNullException(nameof(githubPingService));
+            this.localZipRepository = localZipRepository ?? throw new ArgumentNullException(nameof(localZipRepository));
+            this.onlineZipRepository = onlineZipRepository ?? throw new ArgumentNullException(nameof(onlineZipRepository));
+            this.pingService = pingService ?? throw new ArgumentNullException(nameof(pingService));
             LoadZipsCommand = new RelayCommand(() => LoadZips());
         }
 
         private void LoadZips()
         {
             string host = "www.github.com";
-            bool result = githubPingService.Ping(host, 3000);
+            bool result = pingService.Ping(host, 3000);
 
             string[] zips = null;
 
             if (!string.IsNullOrEmpty(Cityname))
-                zips = zipRepository.GetZipsFrom(result, Cityname);
+            {
+                zips = result ? onlineZipRepository.GetZipsFrom(Cityname) : localZipRepository.GetZipsFrom(Cityname);
+            }
 
             if (zips?.Length > 0)
             {
                 ZipSource = zips;
+                return;
             }
-            else
-            {
-                ZipSource = new[] { "No results found" };
-            }
+
+            ZipSource = new[] { "No results found" };
         }
 
         public string Cityname { get; set; } = string.Empty;

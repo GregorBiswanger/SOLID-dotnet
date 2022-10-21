@@ -1,4 +1,5 @@
-﻿using PlzSuperTool.Contracts;
+﻿using System;
+using PlzSuperTool.Contracts;
 using PlzSuperTool.Implementations;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -15,9 +16,11 @@ namespace PlzSuperTool
         public MainWindow()
         {
             InitializeComponent();
-            IZipSource zipRepository = new ZipRepository();
+            ILogger logger = new Logger();
+            IZipSource localzipRepository = new LocalZipRepository(logger);
+            IZipSource onlinezipRepository = new OnlineZipRepository(logger);
             IPingService githubPingService = new GithubPingService();
-            DataContext = new MainViewModel(zipRepository, githubPingService);
+            DataContext = new MainViewModel(localzipRepository, onlinezipRepository, githubPingService);
         }
     }
 }

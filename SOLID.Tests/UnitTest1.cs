@@ -14,9 +14,10 @@ public class Tests
     [Test]
     public void ContainsZipFromBerlinTest()
     {
-        IZipSource zipService = new ZipRepository();
+        IZipSource localzipService = new LocalZipRepository(null);
+        IZipSource onlinezipService = new OnlineZipRepository(null);
         IPingService githubPingService = new GithubPingService();
-        MainViewModel vm = new(zipService, githubPingService);
+        MainViewModel vm = new(localzipService, onlinezipService, githubPingService);
 
         vm.Cityname = "Berlin";
         vm.LoadZipsCommand.Execute(null);

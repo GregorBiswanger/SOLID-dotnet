@@ -8,6 +8,6 @@ namespace PlzSuperTool.Contracts
 {
     public interface IZipSource
     {
-        string[] GetZipsFrom(bool online, string cityname);
+        string[] GetZipsFrom(string cityname);
     }
 }
