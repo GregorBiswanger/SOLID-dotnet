@@ -10,8 +10,6 @@ namespace PlzSuperTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        IZipRepository zipRepository = new ZipRepository();
-        
         public MainWindow()
         {
             InitializeComponent();
@@ -19,29 +17,8 @@ namespace PlzSuperTool
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            string host = "www.github.com";
-            bool result = false;
-            Ping p = new Ping();
-            try
-            {
-                PingReply reply = p.Send(host, 3000);
-                if (reply.Status == IPStatus.Success)
-                {
-                    result = true;
-                }
-            }
-            catch { }
-
-            var zips = zipRepository.GetZipsFrom(result, CityNameTextBox.Text);
-            
-            if (zips.Length > 0)
-            {
-                ZipsResultListBox.ItemsSource = new List<string>(zips);
-            }
-            else
-            {
-                ZipsResultListBox.ItemsSource = new []{"No results found"};
-            }
+            var viewModel = (MainWindowViewModel)DataContext;
+            viewModel.SearchZips();
         }
     }
 }
