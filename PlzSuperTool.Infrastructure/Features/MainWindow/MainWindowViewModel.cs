@@ -26,7 +26,7 @@ namespace PlzSuperTool.Infrastructure.Features.MainWindow
             }
             catch { }
 
-            var zips = zipRepository.GetZipsFrom(result, Cityname);
+            var zips = zipRepository.GetZipsFrom(Cityname);
 
             if (zips.Length > 0)
             {

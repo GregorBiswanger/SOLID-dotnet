@@ -6,8 +6,8 @@ namespace PlzSuperTool.Infrastructure.Features.MainWindow
     public class ZipRepository : IZipRepository
     {
         private readonly Dictionary<string, string[]> cache = new Dictionary<string, string[]>();
-        
-        public string[] GetZipsFrom(bool online, string cityname)
+
+        public string[] GetZipsFrom(string cityname)
         {
             using var logger = File.AppendText("log.txt");
             logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname);
@@ -18,35 +18,21 @@ namespace PlzSuperTool.Infrastructure.Features.MainWindow
             {
                 return cache[cityname];
             }
-            
-            if (online != true)
+
+
+            string citynameUrlEncoded = HttpUtility.UrlEncode(cityname);
+            const string baseUrl = "https://public.opendatasoft.com/api/records/1.0/search/";
+            string query = $"?dataset=georef-germany-postleitzahl&q={citynameUrlEncoded}&facet=plz_name&facet=lan_name&facet=lan_code&rows=9999";
+
+            var httpClient = new HttpClient();
+            var stream = httpClient.GetStreamAsync(baseUrl + query).Result;
+
+            var plzResponse = JsonSerializer.DeserializeAsync<PlzResponse>(stream).Result;
+
+            plzResponse.records.ToList().ForEach(record =>
             {
-                foreach (var line in File.ReadAllLines("DE.txt"))
-                {
-                    var words = line.Split('\t');
-
-                    if (words[2].StartsWith(cityname, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        zips.Add(words[1]);
-                    }
-                }
-            }
-            else
-            {
-                string citynameUrlEncoded = HttpUtility.UrlEncode(cityname);
-                const string baseUrl = "https://public.opendatasoft.com/api/records/1.0/search/";
-                string query = $"?dataset=georef-germany-postleitzahl&q={citynameUrlEncoded}&facet=plz_name&facet=lan_name&facet=lan_code&rows=9999";
-
-                var httpClient = new HttpClient();
-                var stream = httpClient.GetStreamAsync(baseUrl + query).Result;
-
-                var plzResponse = JsonSerializer.DeserializeAsync<PlzResponse>(stream).Result;
-
-                plzResponse.records.ToList().ForEach(record =>
-                {
-                    zips.Add(record.fields.plz_code);
-                });
-            }
+                zips.Add(record.fields.plz_code);
+            });
 
             cache.Add(cityname, zips.ToArray());
             logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname + " - " + zips.Count + " results");
