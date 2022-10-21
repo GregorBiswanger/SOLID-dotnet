@@ -10,7 +10,8 @@ namespace PlzSuperTool.Tests
         {
             // AAA
             // Arrange
-            var mainWindowViewModel = new MainWindowViewModel();
+            var zipRepository = new ZipFileRepository();
+            var mainWindowViewModel = new MainWindowViewModel(zipRepository);
 
             // Action
             mainWindowViewModel.Cityname = "Nürnberg";

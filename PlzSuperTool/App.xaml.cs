@@ -21,10 +21,11 @@ namespace PlzSuperTool
         {
             base.OnStartup(e);
 
-            var serivceCollection = new ServiceCollection();
-            serivceCollection.AddTransient<MainWindowViewModel>();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddTransient<MainWindowViewModel>();
+            serviceCollection.AddTransient<ZipFileRepository>();
 
-            _serviceProvider = serivceCollection.BuildServiceProvider(true);
+            _serviceProvider = serviceCollection.BuildServiceProvider(true);
 
             Current.MainWindow = new MainWindow();
             Current.MainWindow.DataContext = _serviceProvider.GetService<MainWindowViewModel>();

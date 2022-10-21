@@ -5,11 +5,16 @@ namespace PlzSuperTool.Infrastructure.Features.MainWindow
 {
     public class MainWindowViewModel
     {
-        IZipRepository zipRepository = new ZipRepository();
-        
         public string Cityname { get; set; } = string.Empty;
 
         public ObservableCollection<string> Zips { get; set; } = new();
+        
+        private readonly IZipRepository _zipRepository;
+
+        public MainWindowViewModel(IZipRepository zipRepository)
+        {
+            _zipRepository = zipRepository;
+        }
 
         public void SearchZips()
         {
@@ -26,7 +31,7 @@ namespace PlzSuperTool.Infrastructure.Features.MainWindow
             }
             catch { }
 
-            var zips = zipRepository.GetZipsFrom(Cityname);
+            var zips = _zipRepository.GetZipsFrom(Cityname);
 
             if (zips.Length > 0)
             {
