@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using PlzSuperTool.Contracts;
 using PlzSuperTool.Implementations;
 using System.Collections.Generic;
@@ -13,14 +13,21 @@ namespace PlzSuperTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly ILogger logger;
         public MainWindow()
         {
             InitializeComponent();
-            ILogger logger = new Logger();
+            logger = new Logger();
             IZipSource localzipRepository = new LocalZipRepository(logger);
             IZipSource onlinezipRepository = new OnlineZipRepository(logger);
             IPingService githubPingService = new GithubPingService();
             DataContext = new MainViewModel(localzipRepository, onlinezipRepository, githubPingService);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            logger.Dispose();
+            base.OnClosed(e);
         }
     }
 }

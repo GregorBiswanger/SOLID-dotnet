@@ -22,4 +22,10 @@
       <ProjectReference Include="..\SOLID.ViewModels\SOLID.ViewModels.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="DE.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
