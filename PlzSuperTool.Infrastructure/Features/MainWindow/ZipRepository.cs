@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Web;
 
-namespace PlzSuperTool
+namespace PlzSuperTool.Infrastructure.Features.MainWindow
 {
-    internal class ZipRepository : IZipRepository
+    public class ZipRepository : IZipRepository
     {
         private readonly Dictionary<string, string[]> cache = new Dictionary<string, string[]>();
         

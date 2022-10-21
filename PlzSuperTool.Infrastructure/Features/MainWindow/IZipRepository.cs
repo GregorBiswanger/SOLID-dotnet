@@ -1,6 +1,6 @@
-﻿namespace PlzSuperTool;
+﻿namespace PlzSuperTool.Infrastructure.Features.MainWindow;
 
-internal interface IZipRepository
+public interface IZipRepository
 {
     string[] GetZipsFrom(bool online, string cityname);
     string[] GetStreetsFromZip(string zip);
