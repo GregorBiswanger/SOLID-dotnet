@@ -8,8 +8,13 @@ public class MainWindowViewModel
     public string CityName { get; set; } = "";
     public ObservableCollection<string> Zips { get; set; } = new();
 
-    IZipRepository zipRepository = new ZipRepository();
-    
+    private readonly IZipRepository _zipRepository;
+
+    public MainWindowViewModel(IZipRepository zipRepository)
+    {
+        _zipRepository = zipRepository;
+    }
+
     public void SearchZips()
     {
         string host = "www.github.com";
@@ -25,7 +30,7 @@ public class MainWindowViewModel
         }
         catch { }
 
-        var zips = zipRepository.GetZipsFrom(result, CityName);
+        var zips = _zipRepository.GetZipsFrom(result, CityName);
         Zips.Clear();
 
         if (zips.Length > 0)

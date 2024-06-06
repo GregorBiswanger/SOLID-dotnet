@@ -8,7 +8,8 @@ public class MainWindowViewModelTests
     public void Should_return_85055_from_Ingolstadt()
     {
         // Arrange
-        var viewModel = new MainWindowViewModel
+        var zipRepository = new ZipRepository();
+        var viewModel = new MainWindowViewModel(zipRepository)
         {
             CityName = "Ingolstadt"
         };

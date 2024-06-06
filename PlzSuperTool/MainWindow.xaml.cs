@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Windows;
+﻿using System.Windows;
 using PlzSuperTool.Infrastructure.Features.MainWindow;
 
 namespace PlzSuperTool
