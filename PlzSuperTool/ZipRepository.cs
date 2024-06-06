@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web;
 
 namespace PlzSuperTool
@@ -45,11 +46,14 @@ namespace PlzSuperTool
                 var httpClient = new HttpClient();
                 var stream = httpClient.GetStreamAsync(baseUrl + query).Result;
 
-                var plzResponse = JsonSerializer.DeserializeAsync<PlzResponse>(stream).Result;
-
-                plzResponse.records.ToList().ForEach(record =>
+                var plzResponse = JsonSerializer.DeserializeAsync<PlzResponse>(stream, new JsonSerializerOptions
                 {
-                    zips.Add(record.fields.plz_code);
+                    PropertyNameCaseInsensitive = true
+                }).Result;
+
+                plzResponse.Records.ToList().ForEach(record =>
+                {
+                    zips.Add(record.Fields.PlzCode);
                 });
             }
 
@@ -62,69 +66,18 @@ namespace PlzSuperTool
 
     public class PlzResponse
     {
-        public int nhits { get; set; }
-        public Parameters parameters { get; set; }
-        public Record[] records { get; set; }
-        public Facet_Groups[] facet_groups { get; set; }
-    }
-
-    public class Parameters
-    {
-        public string dataset { get; set; }
-        public string q { get; set; }
-        public int rows { get; set; }
-        public int start { get; set; }
-        public string[] facet { get; set; }
-        public string format { get; set; }
-        public string timezone { get; set; }
+        public int Nhits { get; set; }
+        public Record[]? Records { get; set; }
     }
 
     public class Record
     {
-        public string datasetid { get; set; }
-        public string recordid { get; set; }
-        public Fields fields { get; set; }
-        public Geometry1 geometry { get; set; }
-        public DateTime record_timestamp { get; set; }
+        public Fields? Fields { get; set; }
     }
 
     public class Fields
     {
-        public string krs_code { get; set; }
-        public string lan_code { get; set; }
-        public float[] geo_point_2d { get; set; }
-        public string plz_name { get; set; }
-        public string plz_name_long { get; set; }
-        public string lan_name { get; set; }
-        public string name { get; set; }
-        public string plz_code { get; set; }
-        public string krs_name { get; set; }
-        public Geometry geometry { get; set; }
-    }
-
-    public class Geometry
-    {
-        public float[][][] coordinates { get; set; }
-        public string type { get; set; }
-    }
-
-    public class Geometry1
-    {
-        public string type { get; set; }
-        public float[] coordinates { get; set; }
-    }
-
-    public class Facet_Groups
-    {
-        public string name { get; set; }
-        public Facet[] facets { get; set; }
-    }
-
-    public class Facet
-    {
-        public string name { get; set; }
-        public int count { get; set; }
-        public string state { get; set; }
-        public string path { get; set; }
+        [JsonPropertyName("plz_code")]
+        public string? PlzCode { get; set; }
     }
 }
