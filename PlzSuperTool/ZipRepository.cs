@@ -14,7 +14,7 @@ namespace PlzSuperTool
         
         public string[] GetZipsFrom(bool online, string cityname)
         {
-            using var logger = File.AppendText("log.txt");
+            using var logger = File.AppendText(AppDomain.CurrentDomain.BaseDirectory + "log.txt");
             logger.WriteLine(DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToShortTimeString() + " - GetZipsFrom: " + cityname);
 
             var zips = new List<string>();
@@ -26,7 +26,7 @@ namespace PlzSuperTool
             
             if (online != true)
             {
-                foreach (var line in File.ReadAllLines("DE.txt"))
+                foreach (var line in File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "DE.txt"))
                 {
                     var words = line.Split('\t');
 
