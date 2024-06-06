@@ -58,21 +58,6 @@ namespace PlzSuperTool
 
             return zips.ToArray();
         }
-
-        public string[] GetStreetsFromZip(string zip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] GetAllCities()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] GetAllStates()
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class PlzResponse
