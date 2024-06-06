@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Web;
+using PlzSuperTool.Infrastructure.Entities;
 
 namespace PlzSuperTool.Infrastructure.Features.MainWindow;
 
@@ -57,21 +57,4 @@ public class ZipRepository : IZipRepository
 
         return zips.ToArray();
     }
-}
-
-public class PlzResponse
-{
-    public int Nhits { get; set; }
-    public Record[]? Records { get; set; }
-}
-
-public class Record
-{
-    public Fields? Fields { get; set; }
-}
-
-public class Fields
-{
-    [JsonPropertyName("plz_code")]
-    public string? PlzCode { get; set; }
 }
