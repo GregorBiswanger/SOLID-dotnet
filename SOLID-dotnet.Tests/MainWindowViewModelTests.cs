@@ -1,4 +1,5 @@
 ﻿using PlzSuperTool.Infrastructure.Features.MainWindow;
+using PlzSuperTool.Infrastructure.Repositories;
 
 namespace SOLID_dotnet.Tests;
 
@@ -8,7 +9,7 @@ public class MainWindowViewModelTests
     public void Should_return_85055_from_Ingolstadt()
     {
         // Arrange
-        var zipRepository = new ZipRepository();
+        var zipRepository = new ZipFileRepository(new ZipsFileReader());
         var viewModel = new MainWindowViewModel(zipRepository)
         {
             CityName = "Ingolstadt"

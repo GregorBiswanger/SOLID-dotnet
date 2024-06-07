@@ -11,11 +11,6 @@ public class ZipFileRepository : IZipRepository
         _zipsFileReader = zipsFileReader;
     }
 
-    public string[] GetZipsFrom(bool online, string cityName)
-    {
-        throw new NotImplementedException();
-    }
-
     public string[] LoadZipsFrom(string cityName)
     {
         var zips = new List<string>();

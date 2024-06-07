@@ -30,7 +30,7 @@ public class MainWindowViewModel
         }
         catch { }
 
-        var zips = _zipRepository.GetZipsFrom(result, CityName);
+        var zips = _zipRepository.LoadZipsFrom(CityName);
         Zips.Clear();
 
         if (zips.Length > 0)
