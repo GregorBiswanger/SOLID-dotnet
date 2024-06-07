@@ -13,7 +13,8 @@ public class ZipWebRepositoryTests
     public async Task Should_give_postcode_when_given_cityName_web_based(string cityName)
     {
         // Arrange
-        IZipRepository zipRepository = new ZipWebRepository();
+        IZipsWebReader zipsWebReader = new ZipsWebReader();
+        IZipRepository zipRepository = new ZipWebRepository(zipsWebReader);
 
         // Act
         var zips = zipRepository.LoadZipsFrom(cityName).OrderBy(zip => zip);
@@ -28,7 +29,8 @@ public class ZipWebRepositoryTests
     public void Should_give_postcode_when_given_cityName_web_based_2(string cityName)
     {
         // Arrange
-        IZipRepository zipRepository = new ZipWebRepository();
+        IZipsWebReader zipsWebReader = new ZipsWebReader();
+        IZipRepository zipRepository = new ZipWebRepository(zipsWebReader);
 
         // Act
         var zips = zipRepository.LoadZipsFrom(cityName);
