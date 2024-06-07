@@ -25,16 +25,16 @@ public partial class App : Application
             .AddTransient<ZipFileRepository>()
             .AddTransient<ZipWebRepository>()
             .AddTransient<NetworkService>()
-            .AddTransient<IZipRepository>(serviceProvider =>
+            .AddSingleton<IZipRepository>(serviceProvider =>
             {
                 var networkService = serviceProvider.GetRequiredService<NetworkService>();
 
                 if (networkService.IsOnline())
                 {
-                    return serviceProvider.GetRequiredService<ZipWebRepository>();
+                    return new ZipCaching(serviceProvider.GetRequiredService<ZipWebRepository>());
                 }
 
-                return serviceProvider.GetRequiredService<ZipFileRepository>();
+                return new ZipCaching(serviceProvider.GetRequiredService<ZipFileRepository>());
             });
 
         _serviceProvider = serviceCollection.BuildServiceProvider(true);
