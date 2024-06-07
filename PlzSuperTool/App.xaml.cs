@@ -19,8 +19,9 @@ public partial class App : Application
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddTransient<MainWindowViewModel>()
-            .AddTransient<IZipRepository, ZipFileRepository>()
-            .AddTransient<IZipsFileReader, ZipsFileReader>();
+            .AddTransient<IZipRepository, ZipWebRepository>()
+            .AddTransient<IZipsFileReader, ZipsFileReader>()
+            .AddTransient<IZipsWebReader, ZipsWebReader>();
             
         _serviceProvider = serviceCollection.BuildServiceProvider(true);
 
