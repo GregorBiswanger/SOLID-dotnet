@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using PlzSuperTool.Infrastructure.Features.MainWindow;
 using PlzSuperTool.Infrastructure.Repositories;
+using PlzSuperTool.Infrastructure.Services;
 
 namespace PlzSuperTool;
 
@@ -19,10 +20,23 @@ public partial class App : Application
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddTransient<MainWindowViewModel>()
-            .AddTransient<IZipRepository, ZipWebRepository>()
             .AddTransient<IZipsFileReader, ZipsFileReader>()
-            .AddTransient<IZipsWebReader, ZipsWebReader>();
-            
+            .AddTransient<IZipsWebReader, ZipsWebReader>()
+            .AddTransient<ZipFileRepository>()
+            .AddTransient<ZipWebRepository>()
+            .AddTransient<NetworkService>()
+            .AddTransient<IZipRepository>(serviceProvider =>
+            {
+                var networkService = serviceProvider.GetRequiredService<NetworkService>();
+
+                if (networkService.IsOnline())
+                {
+                    return serviceProvider.GetRequiredService<ZipWebRepository>();
+                }
+
+                return serviceProvider.GetRequiredService<ZipFileRepository>();
+            });
+
         _serviceProvider = serviceCollection.BuildServiceProvider(true);
 
         Current.MainWindow = new MainWindow();
