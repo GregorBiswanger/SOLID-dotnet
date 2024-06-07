@@ -15,10 +15,4 @@
     <ProjectReference Include="..\PlzSuperTool.Infrastructure\PlzSuperTool.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="DE.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

@@ -57,4 +57,9 @@ public class ZipRepository : IZipRepository
 
         return zips.ToArray();
     }
+
+    public string[] LoadZipsFrom(string cityName)
+    {
+        throw new NotImplementedException();
+    }
 }
