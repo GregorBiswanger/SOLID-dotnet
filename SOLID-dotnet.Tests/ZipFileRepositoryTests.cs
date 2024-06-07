@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Moq;
-using PlzSuperTool.Infrastructure.Features.MainWindow;
 using PlzSuperTool.Infrastructure.Repositories;
 
 namespace SOLID_dotnet.Tests;

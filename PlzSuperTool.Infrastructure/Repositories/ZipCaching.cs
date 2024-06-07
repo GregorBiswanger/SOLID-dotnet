@@ -1,6 +1,4 @@
-﻿using PlzSuperTool.Infrastructure.Features.MainWindow;
-
-namespace PlzSuperTool.Infrastructure.Repositories;
+﻿namespace PlzSuperTool.Infrastructure.Repositories;
 
 public class ZipCaching : IZipRepository
 {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
+using PlzSuperTool.Infrastructure.Repositories;
 
 namespace PlzSuperTool.Infrastructure.Features.MainWindow;
 

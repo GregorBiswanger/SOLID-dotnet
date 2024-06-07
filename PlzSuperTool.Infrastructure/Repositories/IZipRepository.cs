@@ -1,4 +1,4 @@
-﻿namespace PlzSuperTool.Infrastructure.Features.MainWindow;
+﻿namespace PlzSuperTool.Infrastructure.Repositories;
 
 public interface IZipRepository
 {

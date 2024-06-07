@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
 using PlzSuperTool.Infrastructure.Entities;
-using PlzSuperTool.Infrastructure.Features.MainWindow;
 using PlzSuperTool.Infrastructure.Repositories;
 using Snapshooter;
 using Snapshooter.Xunit;
