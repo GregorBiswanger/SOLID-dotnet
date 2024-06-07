@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Net.NetworkInformation;
 using PlzSuperTool.Infrastructure.Repositories;
 
 namespace PlzSuperTool.Infrastructure.Features.MainWindow;
@@ -18,19 +17,6 @@ public class MainWindowViewModel
 
     public void SearchZips()
     {
-        string host = "www.github.com";
-        bool result = false;
-        Ping p = new Ping();
-        try
-        {
-            PingReply reply = p.Send(host, 3000);
-            if (reply.Status == IPStatus.Success)
-            {
-                result = true;
-            }
-        }
-        catch { }
-
         var zips = _zipRepository.LoadZipsFrom(CityName);
         Zips.Clear();
 
