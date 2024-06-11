@@ -2,7 +2,7 @@
 using Moq;
 using PlzSuperTool.Infrastructure.Repositories;
 
-namespace SOLID_dotnet.Tests;
+namespace PlzSuperTool.Tests;
 
 public class ZipFileRepositoryTests
 {

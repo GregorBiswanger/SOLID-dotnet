@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using PlzSuperTool.Infrastructure.Services;
 
-namespace SOLID_dotnet.Tests;
+namespace PlzSuperTool.Tests;
 
 public class NetworkTests
 {

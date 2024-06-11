@@ -6,7 +6,7 @@ using Snapshooter;
 using Snapshooter.Xunit;
 using Record = PlzSuperTool.Infrastructure.Entities.Record;
 
-namespace SOLID_dotnet.Tests;
+namespace PlzSuperTool.Tests;
 
 public class ZipWebRepositoryTests
 {

@@ -1,7 +1,7 @@
 ﻿using PlzSuperTool.Infrastructure.Features.MainWindow;
 using PlzSuperTool.Infrastructure.Repositories;
 
-namespace SOLID_dotnet.Tests;
+namespace PlzSuperTool.Tests;
 
 public class MainWindowViewModelTests
 {

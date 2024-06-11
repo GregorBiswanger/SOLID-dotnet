@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlzSuperTool", "PlzSuperTool\PlzSuperTool.csproj", "{38DEB195-A03E-4E6D-8C5B-5BE194A57E74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOLID-dotnet.Tests", "SOLID-dotnet.Tests\SOLID-dotnet.Tests.csproj", "{040E1AF8-AFF2-4C75-B07D-402A2257F943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlzSuperTool.Tests", "PlzSuperTool.Tests\PlzSuperTool.Tests.csproj", "{040E1AF8-AFF2-4C75-B07D-402A2257F943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlzSuperTool.Infrastructure", "PlzSuperTool.Infrastructure\PlzSuperTool.Infrastructure.csproj", "{4B00C6B0-F1B4-4C6A-B7D0-EA78CA9C479E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlzSuperTool.Infrastructure", "PlzSuperTool.Infrastructure\PlzSuperTool.Infrastructure.csproj", "{4B00C6B0-F1B4-4C6A-B7D0-EA78CA9C479E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

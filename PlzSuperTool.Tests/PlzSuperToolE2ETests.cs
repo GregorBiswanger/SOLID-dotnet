@@ -1,10 +1,7 @@
-using System;
-using Xunit;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
-using OpenQA.Selenium.Remote;
 
-namespace SOLID_dotnet.Tests;
+namespace PlzSuperTool.Tests;
 
 public class PlzSuperToolE2ETests : IDisposable
 {
